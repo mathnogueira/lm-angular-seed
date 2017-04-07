@@ -11,7 +11,7 @@
  */
 function controller(module, name) {
     return function(target) {
-        angular.module(module).controller(name, target);
+        __ngAddComponent(module, name, 'controller', target);
         return target;
     };
 }
@@ -25,7 +25,7 @@ function controller(module, name) {
  */
 function service(module, name) {
     return function(target) {
-        angular.module(module).service(name, target);
+        __ngAddComponent(module, name, 'service', target);
         return target;
     };
 }
@@ -39,7 +39,7 @@ function service(module, name) {
  */
 function factory(module, name) {
     return function(target) {
-        angular.module(module).factory(name, target);
+        __ngAddComponent(module, name, 'factory', target);
         return target;
     };
 }
@@ -58,7 +58,7 @@ function directive(module, name) {
         let config = target.config();
         config.controller = target;
         config.link = target.link;
-        angular.module(module).directive(name, () => config);
+        __ngAddComponent(module, name, 'directive', () => config);
         return target;
     };
 }
@@ -76,4 +76,10 @@ function inject(dependencies) {
         target.$inject = deps;
         return target;
     };
+}
+
+// Private functions
+
+function __ngAddComponent(module, name, type, target)  {
+    angular.module(module)[type](name, target);
 }
