@@ -1,2 +1,4 @@
 angular
-    .module('app.core', []);
+    .module('app.core', [
+        'ui.router',
+    ]);

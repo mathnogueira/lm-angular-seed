@@ -14,7 +14,7 @@ class HelloDirective {
     }
 
     static link() {
-        console.log('k');
+        console.log('This is the hello directive\'s link function');
     }
 
     constructor() {
