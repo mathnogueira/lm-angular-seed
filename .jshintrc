@@ -1,0 +1,8 @@
+{
+    "esversion": 6,
+    "maxcomplexity": 10,
+    "maxdepth": 3,
+    "ignoreDelimiters": [
+         { "start": "jshint-ignore", "end": "end-ignore" }
+    ]
+}
