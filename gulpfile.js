@@ -38,14 +38,16 @@ gulp.task('watch-pug', watchPug);
 gulp.task('watch-less', watchLess);
 gulp.task('watch-less-components', watchLessPartials);
 gulp.task('watch-index', watchIndex);
+gulp.task('fonts', copyFonts);
 
 function buildApplication() {
-    runSequence(['pug', 'less', 'dependencies', 'jshint'], 'babel', 'index');
+    runSequence(['pug', 'less', 'dependencies', 'jshint', 'fonts'], 'babel', 'index');
 }
 
 function buildDependencies() {
     return gulp
         .src(bowerFiles())
+        .pipe(ignore.include('**/*.js'))
         .pipe(concat('dependencies.js'))
         .pipe(gulp.dest('build/libs/'));
 }
@@ -139,4 +141,10 @@ function watchLess() {
 function watchLessPartials() {
      return watch('style/**/_*.less', compileLess)
         .pipe(debug({ title: 'LESS COMPONENTS WATCH:'}));
+}
+
+function copyFonts() {
+    return gulp
+        .src('./bower_components/font-awesome/fonts/**/*')
+        .pipe(gulp.dest('./build/fonts/'));
 }
