@@ -17,7 +17,7 @@ class HelloDirective {
         console.log('k');
     }
 
-    constructor($http) {
+    constructor() {
         
     }
 }
