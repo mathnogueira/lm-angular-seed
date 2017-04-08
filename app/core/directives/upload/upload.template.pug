@@ -1,0 +1,20 @@
+.file-uploader
+    .outter-container
+        .upload-title
+            h3 Arraste ou selecione um arquivo
+        .inner-container(type="file",
+               ngf-select="uploader.onFilesChange($files)",
+               ngf-drop="uploader.onFilesChange($files)",
+               ng-model="uploader.tmpFiles",
+               ngf-multiple="{{ maxFiles > 1 }}")
+            .upload-logo(ng-class="{ 'contain-files': uploader.tmpFiles.length > 0 }")
+                a(href="")
+                    i.fa.fa-upload
+
+    .file-uploader-list(ng-show="uploader.files.length > 0")
+        ul
+            li(ng-repeat="file in uploader.files track by $index") 
+                span.filename {{ file.name }}
+                span.actions
+                    a(href="", ng-click="uploader.removeFile(file)")
+                        i.fa.fa-times
